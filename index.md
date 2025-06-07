@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artemis Taxi Service - Greece</title>
+    <title>Artemis Taxi Service | Premium Transportation</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icons/6.6.6/css/flag-icons.min.css">
     <style>
         * {
             margin: 0;
@@ -19,77 +18,61 @@
             --greek-blue-light: #1e7fd5;
             --greek-blue-dark: #0a4a8a;
             --greek-white: #ffffff;
-            --greek-sand: #f5e8c9;
-            --greek-sun: #ffb400;
+            --greek-sand: #f5f0e6;
             --greek-olive: #6b8e23;
+            --greek-sun: #ffb400;
         }
         
         body {
-            background: linear-gradient(135deg, var(--greek-blue), var(--greek-blue-light));
+            background: linear-gradient(135deg, #f5f7fa, #e4e9f2);
             color: #333;
             min-height: 100vh;
             padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="25" fill="%23ffffff"/><rect y="50" width="100" height="25" fill="%23ffffff"/><path d="M50,0 L60,20 L80,25 L65,40 L70,60 L50,50 L30,60 L35,40 L20,25 L40,20 Z" fill="%230d5eaf"/></svg>');
-            background-size: 200px;
         }
         
         .container {
-            max-width: 900px;
+            max-width: 800px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
+            background: var(--greek-white);
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
-            border: 5px solid var(--greek-blue);
-            position: relative;
-        }
-        
-        .greek-border {
-            height: 15px;
-            background: repeating-linear-gradient(
-                90deg,
-                var(--greek-blue),
-                var(--greek-blue) 20px,
-                var(--greek-white) 20px,
-                var(--greek-white) 40px
-            );
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
         
         header {
             background: var(--greek-blue);
             color: var(--greek-white);
-            padding: 25px 30px;
+            padding: 30px;
             text-align: center;
             position: relative;
-            background-image: linear-gradient(135deg, var(--greek-blue-dark), var(--greek-blue-light));
         }
         
         .logo {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
             gap: 15px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         
-        .logo i {
+        .logo-icon {
             font-size: 2.8rem;
             color: var(--greek-sun);
         }
         
         .logo h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
         
         .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.95;
-            max-width: 600px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 500px;
             margin: 0 auto;
             line-height: 1.6;
         }
@@ -100,19 +83,14 @@
         
         .form-section {
             margin-bottom: 30px;
-            padding: 20px;
-            border-radius: 15px;
-            background: var(--greek-white);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border: 1px solid rgba(13, 94, 175, 0.1);
         }
         
         .section-title {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--greek-blue-dark);
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 2px solid var(--greek-sand);
+            border-bottom: 1px solid rgba(13, 94, 175, 0.1);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -133,15 +111,16 @@
         label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 600;
+            font-weight: 500;
             color: var(--greek-blue-dark);
+            font-size: 0.95rem;
         }
         
         input, select {
             width: 100%;
-            padding: 14px 15px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
+            padding: 14px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
             font-size: 16px;
             transition: all 0.3s;
             background: #f9f9f9;
@@ -150,7 +129,7 @@
         input:focus, select:focus {
             border-color: var(--greek-blue-light);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(30, 127, 213, 0.2);
+            box-shadow: 0 0 0 3px rgba(30, 127, 213, 0.1);
         }
         
         .required::after {
@@ -165,97 +144,89 @@
         }
         
         .price-display {
-            background: #e8f5e9;
-            border-radius: 10px;
-            padding: 20px;
+            background: #f0f8ff;
+            border-radius: 8px;
+            padding: 18px;
             margin: 25px 0;
             text-align: center;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #2e7d32;
-            border: 2px dashed #4caf50;
-            background: linear-gradient(135deg, #e8f5e9, #d1e9d1);
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--greek-blue-dark);
+            border: 1px solid rgba(13, 94, 175, 0.2);
         }
         
         .price-label {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #666;
             display: block;
             margin-bottom: 5px;
         }
         
         .note {
-            background: #fff8e1;
-            border-left: 4px solid var(--greek-sun);
+            background: #f9f9f9;
             padding: 15px;
             margin: 20px 0;
-            border-radius: 0 8px 8px 0;
-            font-size: 0.95rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
             line-height: 1.6;
+            color: #555;
+            border-left: 3px solid var(--greek-blue-light);
         }
         
         .btn-container {
             display: flex;
             justify-content: center;
-            margin-top: 30px;
+            margin-top: 20px;
         }
         
         .whatsapp-btn {
-            background: #25D366;
+            background: var(--greek-blue);
             color: white;
             border: none;
-            padding: 18px 50px;
-            font-size: 1.3rem;
-            border-radius: 50px;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            border-radius: 8px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             transition: all 0.3s;
-            font-weight: 700;
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-weight: 500;
         }
         
         .whatsapp-btn:hover {
-            background: #128C7E;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.6);
-        }
-        
-        .whatsapp-btn:active {
-            transform: translateY(-1px);
+            background: var(--greek-blue-dark);
+            transform: translateY(-2px);
         }
         
         footer {
             text-align: center;
             padding: 25px;
-            background: var(--greek-blue-dark);
-            color: var(--greek-white);
-            font-size: 1rem;
-            background-image: linear-gradient(to bottom, var(--greek-blue), var(--greek-blue-dark));
+            background: #f5f7fa;
+            color: #555;
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(0,0,0,0.05);
         }
         
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 25px;
             margin-top: 15px;
             flex-wrap: wrap;
         }
         
         .footer-links a {
-            color: var(--greek-sand);
+            color: var(--greek-blue);
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 500;
             display: flex;
             align-items: center;
             gap: 8px;
         }
         
         .footer-links a:hover {
-            color: var(--greek-sun);
+            color: var(--greek-blue-dark);
         }
         
         @keyframes fadeIn {
@@ -266,11 +237,11 @@
         .van-required {
             display: none;
             background: #ffebee;
-            border-left: 4px solid #f44336;
             padding: 12px;
-            border-radius: 0 8px 8px 0;
+            border-radius: 8px;
             margin-top: 10px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            color: #d32f2f;
         }
         
         .flight-group {
@@ -279,12 +250,11 @@
         
         .greek-pattern {
             position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 200px;
-            height: 200px;
+            bottom: -10px;
+            right: -10px;
+            width: 100px;
+            height: 100px;
             opacity: 0.1;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="10" fill="%230d5eaf"/><circle cx="20" cy="20" r="8" fill="%230d5eaf"/><circle cx="80" cy="80" r="8" fill="%230d5eaf"/><path d="M30,50 Q50,30 70,50 Q50,70 30,50" fill="none" stroke="%230d5eaf" stroke-width="2"/></svg>');
             pointer-events: none;
             z-index: 0;
         }
@@ -300,25 +270,15 @@
                 padding: 10px;
             }
             
-            .container {
-                border-radius: 15px;
-            }
-            
             header {
-                padding: 20px 15px;
-            }
-            
-            .logo h1 {
-                font-size: 1.8rem;
+                padding: 25px 20px;
             }
             
             .form-container {
-                padding: 20px 15px;
+                padding: 25px 20px;
             }
             
             .whatsapp-btn {
-                padding: 16px 40px;
-                font-size: 1.2rem;
                 width: 100%;
                 justify-content: center;
             }
@@ -326,23 +286,19 @@
             .form-row {
                 gap: 10px;
             }
-            
-            .form-group {
-                flex: 1 1 100%;
-            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="greek-border"></div>
-        
         <header>
             <div class="logo">
-                <i class="fas fa-taxi"></i>
+                <div class="logo-icon">
+                    <i class="fas fa-taxi"></i>
+                </div>
                 <h1>Artemis Taxi Service</h1>
             </div>
-            <p class="subtitle">Experience the convenience of premium transportation with our Greek hospitality</p>
+            <p class="subtitle">Premium transportation with Greek hospitality</p>
         </header>
         
         <div class="form-container">
@@ -512,28 +468,23 @@
                         <i class="fas fa-info-circle"></i> 
                         <strong>Pricing Information:</strong> 
                         Day rates (05:00-24:00) and Night rates (00:00-04:59) apply. 
-                        Taxi Van price is 2x the standard taxi price. VIP Van has special pricing for airport routes.
-                        Commission is included in the displayed price.
+                        All prices include taxes and service fees.
                     </div>
                 </div>
                 
                 <div class="btn-container">
                     <button type="button" id="sendWhatsApp" class="whatsapp-btn">
-                        <i class="fab fa-whatsapp"></i> Send Booking via WhatsApp
+                        <i class="fab fa-whatsapp"></i> Send Booking Request
                     </button>
                 </div>
             </form>
         </div>
         
-        <div class="greek-pattern"></div>
-        
         <footer>
-            <p>Experience Authentic Greek Hospitality</p>
+            <p>Artemis Taxi Service &copy; 2023</p>
             <div class="footer-links">
                 <a href="tel:+306984701856"><i class="fas fa-phone"></i> +30 698 470 1856</a>
                 <a href="tel:+97337560499"><i class="fas fa-phone"></i> +973 37560499</a>
-                <a href="#"><i class="fas fa-question-circle"></i> Help Center</a>
-                <span class="fi fi-gr"></span>
             </div>
         </footer>
     </div>
@@ -546,20 +497,20 @@
         // Pricing structure - Day and Night rates
         const basePricesDay = {
             "Niriidwn 12 Artemis (Family Beach House)": {
-                "Athens International Airport": 40,
-                "Athens City Center": 35,
-                "Piraeus Port": 50,
+                "Athens International Airport": 25,
+                "Athens City Center": 25,
+                "Piraeus Port": 25,
                 "Rafina Port": 25,
-                "Lavrio Port": 30,
-                "Sounio": 45,
-                "Vravrona": 15,
-                "Loutsa": 10,
-                "Artemida Center": 8,
-                "Marathonas": 20,
+                "Lavrio Port": 25,
+                "Sounio": 25,
+                "Vravrona": 25,
+                "Loutsa": 25,
+                "Artemida Center": 25,
+                "Marathonas": 25,
                 "Other": null
             },
             "Athens International Airport": {
-                "Niriidwn 12 Artemis (Family Beach House)": 40,
+                "Niriidwn 12 Artemis (Family Beach House)": 25,
                 "Athens City Center": 30,
                 "Piraeus Port": 35,
                 "Rafina Port": 45,
@@ -576,29 +527,29 @@
         
         const basePricesNight = {
             "Niriidwn 12 Artemis (Family Beach House)": {
-                "Athens International Airport": 50,
-                "Athens City Center": 45,
-                "Piraeus Port": 60,
-                "Rafina Port": 35,
-                "Lavrio Port": 40,
-                "Sounio": 55,
-                "Vravrona": 25,
-                "Loutsa": 20,
-                "Artemida Center": 18,
+                "Athens International Airport": 30,
+                "Athens City Center": 30,
+                "Piraeus Port": 30,
+                "Rafina Port": 30,
+                "Lavrio Port": 30,
+                "Sounio": 30,
+                "Vravrona": 30,
+                "Loutsa": 30,
+                "Artemida Center": 30,
                 "Marathonas": 30,
                 "Other": null
             },
             "Athens International Airport": {
-                "Niriidwn 12 Artemis (Family Beach House)": 50,
-                "Athens City Center": 40,
-                "Piraeus Port": 45,
-                "Rafina Port": 55,
-                "Lavrio Port": 70,
-                "Sounio": 75,
-                "Vravrona": 55,
-                "Loutsa": 50,
-                "Artemida Center": 48,
-                "Marathonas": 60,
+                "Niriidwn 12 Artemis (Family Beach House)": 30,
+                "Athens City Center": 35,
+                "Piraeus Port": 40,
+                "Rafina Port": 50,
+                "Lavrio Port": 65,
+                "Sounio": 70,
+                "Vravrona": 50,
+                "Loutsa": 45,
+                "Artemida Center": 43,
+                "Marathonas": 55,
                 "Other": null
             },
             // Add other origin points as needed
@@ -683,7 +634,6 @@
             const from = fromLocation.value;
             const to = toLocation.value;
             const vehicle = vehicleType.value;
-            const passengerCount = passengers.value ? parseInt(passengers.value) : 0;
             
             // Get time and determine day/night rate
             const time = timeInput.value;
@@ -715,33 +665,22 @@
                 return;
             }
             
-            // Apply vehicle multipliers and commissions
+            // Apply vehicle multipliers
             let finalPrice = basePrice;
-            let commission = 0;
             
-            if (vehicle === 'Standard Taxi') {
-                commission = 5;
-                finalPrice += commission;
-            } 
-            else if (vehicle === 'Taxi Van') {
-                finalPrice = basePrice * 2; // Van base price
-                commission = 10;
-                finalPrice += commission;
+            if (vehicle === 'Taxi Van') {
+                finalPrice = basePrice * 2;
             } 
             else if (vehicle === 'VIP Van') {
                 // Special pricing for airport route
                 if (to.includes('Airport') || from.includes('Airport')) {
-                    finalPrice = 95; // Fixed price including commission
+                    finalPrice = 95;
                 } else {
-                    finalPrice = basePrice * 2; // Van base price
-                    commission = 10;
-                    finalPrice += commission;
+                    finalPrice = basePrice * 2;
                 }
             }
             else if (vehicle === 'Two Taxis') {
-                finalPrice = basePrice * 2; // Two taxis
-                commission = 10; // 5€ per taxi
-                finalPrice += commission;
+                finalPrice = basePrice * 2;
             }
             
             priceDisplay.textContent = `${finalPrice}€`;
@@ -800,7 +739,7 @@
             message += `• *Checked Luggage:* ${checkedLuggage} pieces\n`;
             message += `• *Cabin Luggage:* ${cabinLuggage} pieces\n`;
             message += `• *Vehicle Type:* ${vehicle}\n`;
-            message += `• *Estimated Price:* ${price}\n\n`;
+            message += `• *Estimated Price:* ${price} (includes all taxes and fees)\n\n`;
             message += `_This request was sent via the property's booking system_`;
             
             // Encode for URL
