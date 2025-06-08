@@ -248,23 +248,6 @@
             display: none;
         }
         
-        .greek-pattern {
-            position: absolute;
-            bottom: -10px;
-            right: -10px;
-            width: 100px;
-            height: 100px;
-            opacity: 0.1;
-            pointer-events: none;
-            z-index: 0;
-        }
-        
-        .info-icon {
-            color: var(--greek-blue-light);
-            margin-left: 5px;
-            cursor: help;
-        }
-        
         @media (max-width: 768px) {
             body {
                 padding: 10px;
@@ -491,7 +474,7 @@
 
     <script>
         // Phone numbers
-        const taxiProviderNumber = "x306984001013";
+        const taxiProviderNumber = "306984001013";
         const hostNumbers = ["97337560499", "306984701856"];
         
         // Pricing structure - Day and Night rates
@@ -723,7 +706,7 @@
             }
             
             // Create message template
-            let message = `🚕 *Taxi Request from Artemis Beach House* 🏖️\n\n`;
+            let message = `This is a taxi reservation request from a guest of "Family Beach House" at Niriidwn 12.\n\n`;
             message += `• *Guest Name:* ${guestName}\n`;
             message += `• *Phone:* ${phone}\n`;
             message += `• *Date:* ${date}\n`;
@@ -745,15 +728,15 @@
             // Encode for URL
             const encodedMessage = encodeURIComponent(message);
             
-            // Send to taxi provider
+            // Create WhatsApp links
             const taxiLink = `https://wa.me/${taxiProviderNumber}?text=${encodedMessage}`;
-            window.open(taxiLink, '_blank');
+            const hostLink1 = `https://wa.me/${hostNumbers[0]}?text=${encodedMessage}`;
+            const hostLink2 = `https://wa.me/${hostNumbers[1]}?text=${encodedMessage}`;
             
-            // Send to host numbers
-            hostNumbers.forEach(number => {
-                const hostLink = `https://wa.me/${number}?text=${encodedMessage}`;
-                window.open(hostLink, '_blank');
-            });
+            // Open WhatsApp links in new tabs
+            window.open(taxiLink, '_blank');
+            window.open(hostLink1, '_blank');
+            window.open(hostLink2, '_blank');
             
             // Show confirmation
             alert('Your request has been sent via WhatsApp! Please check your WhatsApp app to confirm sending.');
