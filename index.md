@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artemis Taxi Service | Premium Transportation</title>
+    <title>Family Beach House Taxi Service</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,9 +14,9 @@
         }
         
         :root {
-            --greek-blue: #0d5eaf;
+            --greek-blue: #0a4a8a;
             --greek-blue-light: #1e7fd5;
-            --greek-blue-dark: #0a4a8a;
+            --greek-blue-dark: #08356d;
             --greek-white: #ffffff;
             --greek-sand: #f5f0e6;
             --greek-olive: #6b8e23;
@@ -24,7 +24,7 @@
         }
         
         body {
-            background: linear-gradient(135deg, #f5f7fa, #e4e9f2);
+            background: linear-gradient(135deg, #e6f0ff, #d1e3ff);
             color: #333;
             min-height: 100vh;
             padding: 20px;
@@ -34,20 +34,36 @@
         }
         
         .container {
-            max-width: 800px;
+            max-width: 900px;
             width: 100%;
             background: var(--greek-white);
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            position: relative;
         }
         
-        header {
-            background: var(--greek-blue);
-            color: var(--greek-white);
-            padding: 30px;
-            text-align: center;
+        .header-image {
+            height: 250px;
+            background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80');
+            background-size: cover;
+            background-position: center;
             position: relative;
+        }
+        
+        .header-overlay {
+            background: linear-gradient(to bottom, rgba(10, 74, 138, 0.8), rgba(8, 53, 109, 0.9));
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
         }
         
         .logo {
@@ -64,15 +80,17 @@
         }
         
         .logo h1 {
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             font-weight: 600;
             letter-spacing: 0.5px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         
         .subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            max-width: 500px;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
             margin: 0 auto;
             line-height: 1.6;
         }
@@ -83,17 +101,26 @@
         
         .form-section {
             margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 12px;
+            background: #f9fbfd;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border: 1px solid rgba(10, 74, 138, 0.1);
         }
         
         .section-title {
-            font-size: 1.3rem;
-            color: var(--greek-blue-dark);
+            font-size: 1.4rem;
+            color: var(--greek-blue);
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 1px solid rgba(13, 94, 175, 0.1);
+            border-bottom: 2px solid rgba(10, 74, 138, 0.1);
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+        
+        .section-title i {
+            color: var(--greek-blue);
         }
         
         .form-row {
@@ -111,7 +138,7 @@
         label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 500;
+            font-weight: 600;
             color: var(--greek-blue-dark);
             font-size: 0.95rem;
         }
@@ -120,10 +147,12 @@
             width: 100%;
             padding: 14px 16px;
             border: 1px solid #ddd;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 16px;
             transition: all 0.3s;
-            background: #f9f9f9;
+            background: white;
+            color: var(--greek-blue-dark);
+            border: 1px solid rgba(10, 74, 138, 0.2);
         }
         
         input:focus, select:focus {
@@ -144,32 +173,32 @@
         }
         
         .price-display {
-            background: #f0f8ff;
-            border-radius: 8px;
-            padding: 18px;
+            background: linear-gradient(135deg, #e6f0ff, #d1e3ff);
+            border-radius: 10px;
+            padding: 20px;
             margin: 25px 0;
             text-align: center;
-            font-size: 1.6rem;
-            font-weight: 600;
+            font-size: 1.8rem;
+            font-weight: 700;
             color: var(--greek-blue-dark);
-            border: 1px solid rgba(13, 94, 175, 0.2);
+            border: 2px dashed var(--greek-blue-light);
         }
         
         .price-label {
-            font-size: 1rem;
-            color: #666;
+            font-size: 1.1rem;
+            color: var(--greek-blue);
             display: block;
             margin-bottom: 5px;
         }
         
         .note {
-            background: #f9f9f9;
+            background: #f0f7ff;
             padding: 15px;
             margin: 20px 0;
             border-radius: 8px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             line-height: 1.6;
-            color: #555;
+            color: var(--greek-blue-dark);
             border-left: 3px solid var(--greek-blue-light);
         }
         
@@ -180,53 +209,60 @@
         }
         
         .whatsapp-btn {
-            background: var(--greek-blue);
+            background: #25D366;
             color: white;
             border: none;
-            padding: 16px 40px;
-            font-size: 1.1rem;
-            border-radius: 8px;
+            padding: 18px 50px;
+            font-size: 1.2rem;
+            border-radius: 50px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             transition: all 0.3s;
-            font-weight: 500;
+            font-weight: 600;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .whatsapp-btn:hover {
-            background: var(--greek-blue-dark);
-            transform: translateY(-2px);
+            background: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+        }
+        
+        .whatsapp-btn:active {
+            transform: translateY(-1px);
         }
         
         footer {
             text-align: center;
             padding: 25px;
-            background: #f5f7fa;
-            color: #555;
-            font-size: 0.95rem;
-            border-top: 1px solid rgba(0,0,0,0.05);
+            background: var(--greek-blue-dark);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
         }
         
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 25px;
+            gap: 30px;
             margin-top: 15px;
             flex-wrap: wrap;
         }
         
         .footer-links a {
-            color: var(--greek-blue);
+            color: var(--greek-sun);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             display: flex;
             align-items: center;
             gap: 8px;
         }
         
         .footer-links a:hover {
-            color: var(--greek-blue-dark);
+            color: white;
         }
         
         @keyframes fadeIn {
@@ -240,7 +276,7 @@
             padding: 12px;
             border-radius: 8px;
             margin-top: 10px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #d32f2f;
         }
         
@@ -248,20 +284,41 @@
             display: none;
         }
         
+        .taxi-icon {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .taxi-icon i {
+            font-size: 3rem;
+            color: var(--greek-blue);
+        }
+        
         @media (max-width: 768px) {
             body {
                 padding: 10px;
             }
             
-            header {
-                padding: 25px 20px;
+            .container {
+                border-radius: 12px;
+            }
+            
+            .header-image {
+                height: 200px;
+            }
+            
+            .logo h1 {
+                font-size: 1.8rem;
             }
             
             .form-container {
-                padding: 25px 20px;
+                padding: 20px 15px;
             }
             
             .whatsapp-btn {
+                padding: 16px 30px;
+                font-size: 1.1rem;
                 width: 100%;
                 justify-content: center;
             }
@@ -269,22 +326,32 @@
             .form-row {
                 gap: 10px;
             }
+            
+            .form-group {
+                flex: 1 1 100%;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <div class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-taxi"></i>
+        <div class="header-image">
+            <div class="header-overlay">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-taxi"></i>
+                    </div>
+                    <h1>Family Beach House Taxi Service</h1>
                 </div>
-                <h1>Artemis Taxi Service</h1>
+                <p class="subtitle">Enjoy premium transportation with stunning sea views</p>
             </div>
-            <p class="subtitle">Premium transportation with Greek hospitality</p>
-        </header>
+        </div>
         
         <div class="form-container">
+            <div class="taxi-icon">
+                <i class="fas fa-car-side"></i>
+            </div>
+            
             <form id="taxiForm">
                 <!-- Guest Information Section -->
                 <div class="form-section">
@@ -322,15 +389,6 @@
                                 <option value="">Select pickup location</option>
                                 <option value="Niriidwn 12 Artemis (Family Beach House)">Niriidwn 12 Artemis (Family Beach House)</option>
                                 <option value="Athens International Airport">Athens International Airport</option>
-                                <option value="Athens City Center">Athens City Center</option>
-                                <option value="Piraeus Port">Piraeus Port</option>
-                                <option value="Rafina Port">Rafina Port</option>
-                                <option value="Lavrio Port">Lavrio Port</option>
-                                <option value="Sounio">Sounio</option>
-                                <option value="Vravrona">Vravrona</option>
-                                <option value="Loutsa">Loutsa</option>
-                                <option value="Artemida Center">Artemida Center</option>
-                                <option value="Marathonas">Marathonas</option>
                                 <option value="Other">Other location</option>
                             </select>
                         </div>
@@ -341,15 +399,6 @@
                                 <option value="">Select destination</option>
                                 <option value="Niriidwn 12 Artemis (Family Beach House)">Niriidwn 12 Artemis (Family Beach House)</option>
                                 <option value="Athens International Airport">Athens International Airport</option>
-                                <option value="Athens City Center">Athens City Center</option>
-                                <option value="Piraeus Port">Piraeus Port</option>
-                                <option value="Rafina Port">Rafina Port</option>
-                                <option value="Lavrio Port">Lavrio Port</option>
-                                <option value="Sounio">Sounio</option>
-                                <option value="Vravrona">Vravrona</option>
-                                <option value="Loutsa">Loutsa</option>
-                                <option value="Artemida Center">Artemida Center</option>
-                                <option value="Marathonas">Marathonas</option>
                                 <option value="Other">Other destination</option>
                             </select>
                         </div>
@@ -464,78 +513,45 @@
         </div>
         
         <footer>
-            <p>Artemis Taxi Service &copy; 2023</p>
+            <p>Family Beach House Taxi Service &copy; 2023</p>
             <div class="footer-links">
-                <a href="tel:+306984701856"><i class="fas fa-phone"></i> +30 698 470 1856</a>
                 <a href="tel:+97337560499"><i class="fas fa-phone"></i> +973 37560499</a>
+                <a href="#"><i class="fas fa-question-circle"></i> Help Center</a>
             </div>
         </footer>
     </div>
 
     <script>
-        // Phone numbers
-        const taxiProviderNumber = "306984001013";
-        const hostNumbers = ["97337560499", "306984701856"];
+        // Phone number
+        const hostNumber = "97337560499";
         
         // Pricing structure - Day and Night rates
         const basePricesDay = {
             "Niriidwn 12 Artemis (Family Beach House)": {
                 "Athens International Airport": 25,
-                "Athens City Center": 25,
-                "Piraeus Port": 25,
-                "Rafina Port": 25,
-                "Lavrio Port": 25,
-                "Sounio": 25,
-                "Vravrona": 25,
-                "Loutsa": 25,
-                "Artemida Center": 25,
-                "Marathonas": 25,
                 "Other": null
             },
             "Athens International Airport": {
                 "Niriidwn 12 Artemis (Family Beach House)": 25,
-                "Athens City Center": 30,
-                "Piraeus Port": 35,
-                "Rafina Port": 45,
-                "Lavrio Port": 60,
-                "Sounio": 65,
-                "Vravrona": 45,
-                "Loutsa": 40,
-                "Artemida Center": 38,
-                "Marathonas": 50,
                 "Other": null
             },
-            // Add other origin points as needed
+            "Other": {
+                "Other": null
+            }
         };
         
         const basePricesNight = {
             "Niriidwn 12 Artemis (Family Beach House)": {
                 "Athens International Airport": 30,
-                "Athens City Center": 30,
-                "Piraeus Port": 30,
-                "Rafina Port": 30,
-                "Lavrio Port": 30,
-                "Sounio": 30,
-                "Vravrona": 30,
-                "Loutsa": 30,
-                "Artemida Center": 30,
-                "Marathonas": 30,
                 "Other": null
             },
             "Athens International Airport": {
                 "Niriidwn 12 Artemis (Family Beach House)": 30,
-                "Athens City Center": 35,
-                "Piraeus Port": 40,
-                "Rafina Port": 50,
-                "Lavrio Port": 65,
-                "Sounio": 70,
-                "Vravrona": 50,
-                "Loutsa": 45,
-                "Artemida Center": 43,
-                "Marathonas": 55,
                 "Other": null
             },
-            // Add other origin points as needed
+            "Other": {
+                "Other": null
+            }
         };
         
         // DOM elements
@@ -728,15 +744,11 @@
             // Encode for URL
             const encodedMessage = encodeURIComponent(message);
             
-            // Create WhatsApp links
-            const taxiLink = `https://wa.me/${taxiProviderNumber}?text=${encodedMessage}`;
-            const hostLink1 = `https://wa.me/${hostNumbers[0]}?text=${encodedMessage}`;
-            const hostLink2 = `https://wa.me/${hostNumbers[1]}?text=${encodedMessage}`;
+            // Create WhatsApp link
+            const whatsappLink = `https://wa.me/${hostNumber}?text=${encodedMessage}`;
             
-            // Open WhatsApp links in new tabs
-            window.open(taxiLink, '_blank');
-            window.open(hostLink1, '_blank');
-            window.open(hostLink2, '_blank');
+            // Open WhatsApp link in new tab
+            window.open(whatsappLink, '_blank');
             
             // Show confirmation
             alert('Your request has been sent via WhatsApp! Please check your WhatsApp app to confirm sending.');
