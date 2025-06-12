@@ -21,6 +21,7 @@
             --greek-sand: #f5f0e6;
             --greek-olive: #6b8e23;
             --greek-sun: #ffb400;
+            --taxi-yellow: #FFD700;
         }
         
         body {
@@ -76,7 +77,7 @@
         
         .logo-icon {
             font-size: 2.8rem;
-            color: var(--greek-sun);
+            color: var(--taxi-yellow);
         }
         
         .logo h1 {
@@ -85,14 +86,6 @@
             letter-spacing: 0.5px;
             color: white;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
         }
         
         .form-container {
@@ -253,7 +246,7 @@
         }
         
         .footer-links a {
-            color: var(--greek-sun);
+            color: var(--taxi-yellow);
             text-decoration: none;
             font-weight: 600;
             display: flex;
@@ -292,7 +285,16 @@
         
         .taxi-icon i {
             font-size: 3rem;
-            color: var(--greek-blue);
+            color: var(--taxi-yellow);
+        }
+        
+        .pricing-info {
+            background: #fff8e1;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 0.9rem;
+            border-left: 3px solid var(--taxi-yellow);
         }
         
         @media (max-width: 768px) {
@@ -343,7 +345,6 @@
                     </div>
                     <h1>Family Beach House Taxi Service</h1>
                 </div>
-                <p class="subtitle">Enjoy premium transportation with stunning sea views</p>
             </div>
         </div>
         
@@ -496,11 +497,15 @@
                         <span id="priceAmount">-</span>
                     </div>
                     
-                    <div class="note">
+                    <div class="pricing-info">
                         <i class="fas fa-info-circle"></i> 
-                        <strong>Pricing Information:</strong> 
-                        Day rates (05:00-24:00) and Night rates (00:00-04:59) apply. 
-                        All prices include taxes and service fees.
+                        <strong>Pricing Information:</strong>
+                        <ul style="margin-top: 10px; padding-left: 20px;">
+                            <li>Standard Taxi: 25€ (day), 30€ (night) for airport transfers</li>
+                            <li>Taxi Van: 2x standard taxi price based on time</li>
+                            <li>VIP Van: 95€ flat rate for airport transfers</li>
+                            <li>All prices include taxes and service fees</li>
+                        </ul>
                     </div>
                 </div>
                 
@@ -524,35 +529,6 @@
     <script>
         // Phone number
         const hostNumber = "97337560499";
-        
-        // Pricing structure - Day and Night rates
-        const basePricesDay = {
-            "Niriidwn 12 Artemis (Family Beach House)": {
-                "Athens International Airport": 25,
-                "Other": null
-            },
-            "Athens International Airport": {
-                "Niriidwn 12 Artemis (Family Beach House)": 25,
-                "Other": null
-            },
-            "Other": {
-                "Other": null
-            }
-        };
-        
-        const basePricesNight = {
-            "Niriidwn 12 Artemis (Family Beach House)": {
-                "Athens International Airport": 30,
-                "Other": null
-            },
-            "Athens International Airport": {
-                "Niriidwn 12 Artemis (Family Beach House)": 30,
-                "Other": null
-            },
-            "Other": {
-                "Other": null
-            }
-        };
         
         // DOM elements
         const fromLocation = document.getElementById('fromLocation');
@@ -638,7 +614,6 @@
             const time = timeInput.value;
             const [hours] = time.split(':').map(Number);
             const isNightTime = hours >= 0 && hours < 5; // 00:00-04:59
-            const basePrices = isNightTime ? basePricesNight : basePricesDay;
             
             // Reset price display
             priceDisplay.textContent = '-';
@@ -646,40 +621,39 @@
             // Validate selections
             if (!from || !to || !vehicle) return;
             
-            // Get base price for route
-            let basePrice = null;
-            if (basePrices[from] && basePrices[from][to] !== undefined) {
-                basePrice = basePrices[from][to];
-            }
-            
-            // Handle unknown routes
-            if (basePrice === null) {
-                priceDisplay.textContent = 'Price on request';
-                return;
-            }
-            
             // Handle same location
             if (from === to) {
                 priceDisplay.textContent = 'Select different locations';
                 return;
             }
             
-            // Apply vehicle multipliers
-            let finalPrice = basePrice;
+            // Handle airport routes
+            const isAirportRoute = 
+                (from === "Niriidwn 12 Artemis (Family Beach House)" && to === "Athens International Airport") ||
+                (from === "Athens International Airport" && to === "Niriidwn 12 Artemis (Family Beach House)");
             
-            if (vehicle === 'Taxi Van') {
-                finalPrice = basePrice * 2;
-            } 
-            else if (vehicle === 'VIP Van') {
-                // Special pricing for airport route
-                if (to.includes('Airport') || from.includes('Airport')) {
+            // Handle other routes
+            const isOtherRoute = 
+                from === "Other" || to === "Other" ||
+                !isAirportRoute;
+            
+            // Apply pricing rules
+            let finalPrice = 0;
+            
+            if (isAirportRoute) {
+                // Airport route pricing
+                if (vehicle === 'VIP Van') {
                     finalPrice = 95;
-                } else {
+                } else if (vehicle === 'Standard Taxi') {
+                    finalPrice = isNightTime ? 30 : 25;
+                } else if (vehicle === 'Taxi Van' || vehicle === 'Two Taxis') {
+                    const basePrice = isNightTime ? 30 : 25;
                     finalPrice = basePrice * 2;
                 }
-            }
-            else if (vehicle === 'Two Taxis') {
-                finalPrice = basePrice * 2;
+            } else if (isOtherRoute) {
+                // Other route pricing - show as on request
+                priceDisplay.textContent = 'Price on request';
+                return;
             }
             
             priceDisplay.textContent = `${finalPrice}€`;
