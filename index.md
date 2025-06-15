@@ -501,9 +501,10 @@
                         <i class="fas fa-info-circle"></i> 
                         <strong>Pricing Information:</strong>
                         <ul style="margin-top: 10px; padding-left: 20px;">
-                            <li>Standard Taxi: 25€ (day), 30€ (night) for airport transfers</li>
-                            <li>Taxi Van: 2x standard taxi price based on time</li>
+                            <li>Airport Transfer: 30€ for standard taxi</li>
+                            <li>Taxi Van: 60€ (2x standard taxi price)</li>
                             <li>VIP Van: 95€ flat rate for airport transfers</li>
+                            <li>Two Taxis: 60€ (same as Taxi Van)</li>
                             <li>All prices include taxes and service fees</li>
                         </ul>
                     </div>
@@ -610,11 +611,6 @@
             const to = toLocation.value;
             const vehicle = vehicleType.value;
             
-            // Get time and determine day/night rate
-            const time = timeInput.value;
-            const [hours] = time.split(':').map(Number);
-            const isNightTime = hours >= 0 && hours < 5; // 00:00-04:59
-            
             // Reset price display
             priceDisplay.textContent = '-';
             
@@ -645,10 +641,9 @@
                 if (vehicle === 'VIP Van') {
                     finalPrice = 95;
                 } else if (vehicle === 'Standard Taxi') {
-                    finalPrice = isNightTime ? 30 : 25;
+                    finalPrice = 30;
                 } else if (vehicle === 'Taxi Van' || vehicle === 'Two Taxis') {
-                    const basePrice = isNightTime ? 30 : 25;
-                    finalPrice = basePrice * 2;
+                    finalPrice = 60; // 2x standard taxi price
                 }
             } else if (isOtherRoute) {
                 // Other route pricing - show as on request
