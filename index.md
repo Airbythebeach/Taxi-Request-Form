@@ -501,10 +501,11 @@
                         <i class="fas fa-info-circle"></i> 
                         <strong>Pricing Information:</strong>
                         <ul style="margin-top: 10px; padding-left: 20px;">
-                            <li>Airport Transfer: 30€ for standard taxi</li>
-                            <li>Taxi Van: 60€ (2x standard taxi price)</li>
+                            <li>From Niriidwn to Airport: 25€ for standard taxi</li>
+                            <li>From Airport to Niriidwn: 30€ for standard taxi</li>
+                            <li>Taxi Van: 2x standard taxi price</li>
                             <li>VIP Van: 95€ flat rate for airport transfers</li>
-                            <li>Two Taxis: 60€ (same as Taxi Van)</li>
+                            <li>Two Taxis: Same price as Taxi Van</li>
                             <li>All prices include taxes and service fees</li>
                         </ul>
                     </div>
@@ -637,13 +638,24 @@
             let finalPrice = 0;
             
             if (isAirportRoute) {
+                // Determine direction
+                const toAirport = from === "Niriidwn 12 Artemis (Family Beach House)" && to === "Athens International Airport";
+                const fromAirport = from === "Athens International Airport" && to === "Niriidwn 12 Artemis (Family Beach House)";
+                
                 // Airport route pricing
                 if (vehicle === 'VIP Van') {
                     finalPrice = 95;
                 } else if (vehicle === 'Standard Taxi') {
-                    finalPrice = 30;
+                    // Different prices based on direction
+                    if (toAirport) {
+                        finalPrice = 25;  // Niriidwn to Airport
+                    } else if (fromAirport) {
+                        finalPrice = 30;  // Airport to Niriidwn
+                    }
                 } else if (vehicle === 'Taxi Van' || vehicle === 'Two Taxis') {
-                    finalPrice = 60; // 2x standard taxi price
+                    // Calculate based on direction
+                    const basePrice = toAirport ? 25 : 30;
+                    finalPrice = basePrice * 2;
                 }
             } else if (isOtherRoute) {
                 // Other route pricing - show as on request
