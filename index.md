@@ -22,6 +22,7 @@
             --greek-olive: #6b8e23;
             --greek-sun: #ffb400;
             --taxi-yellow: #FFD700;
+            --port-color: #2a7fff;
         }
         
         body {
@@ -159,7 +160,7 @@
             color: #e74c3c;
         }
         
-        .address-group {
+        .address-group, .ship-group {
             display: none;
             margin-top: 10px;
             animation: fadeIn 0.5s;
@@ -273,7 +274,7 @@
             color: #d32f2f;
         }
         
-        .flight-group {
+        .flight-group, .ship-group {
             display: none;
         }
         
@@ -295,6 +296,74 @@
             margin: 15px 0;
             font-size: 0.9rem;
             border-left: 3px solid var(--taxi-yellow);
+        }
+        
+        .port-highlight {
+            color: var(--port-color);
+            font-weight: 700;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            text-align: center;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .modal-icon {
+            font-size: 3rem;
+            color: var(--port-color);
+            margin-bottom: 15px;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--greek-blue);
+        }
+        
+        .modal-message {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .modal-btn {
+            background: var(--port-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
         }
         
         @media (max-width: 768px) {
@@ -336,6 +405,19 @@
     </style>
 </head>
 <body>
+    <!-- Availability Modal -->
+    <div class="modal" id="availabilityModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <div class="modal-icon">
+                <i class="fas fa-info-circle"></i>
+            </div>
+            <h2 class="modal-title" id="modalTitle">Important Notice</h2>
+            <p class="modal-message" id="modalMessage"></p>
+            <button class="modal-btn" id="confirmModal">OK, I Understand</button>
+        </div>
+    </div>
+    
     <div class="container">
         <div class="header-image">
             <div class="header-overlay">
@@ -390,6 +472,7 @@
                                 <option value="">Select pickup location</option>
                                 <option value="Niriidwn 12 Artemis (Family Beach House)">Niriidwn 12 Artemis (Family Beach House)</option>
                                 <option value="Athens International Airport">Athens International Airport</option>
+                                <option value="Port of Rafína">Port of Rafína</option>
                                 <option value="Other">Other location</option>
                             </select>
                         </div>
@@ -400,6 +483,7 @@
                                 <option value="">Select destination</option>
                                 <option value="Niriidwn 12 Artemis (Family Beach House)">Niriidwn 12 Artemis (Family Beach House)</option>
                                 <option value="Athens International Airport">Athens International Airport</option>
+                                <option value="Port of Rafína">Port of Rafína</option>
                                 <option value="Other">Other destination</option>
                             </select>
                         </div>
@@ -423,6 +507,13 @@
                         <div class="form-group">
                             <label for="flightNumber">Flight Number</label>
                             <input type="text" id="flightNumber" placeholder="Enter your flight number">
+                        </div>
+                    </div>
+                    
+                    <div id="shipGroup" class="ship-group">
+                        <div class="form-group">
+                            <label for="shipName">Ship Name</label>
+                            <input type="text" id="shipName" placeholder="Enter your ship name" maxlength="30">
                         </div>
                     </div>
                 </div>
@@ -505,6 +596,7 @@
                             <li>From Airport to Niriidwn: 30€ for standard taxi</li>
                             <li>Taxi Van: 2x standard taxi price</li>
                             <li>VIP Van: 95€ flat rate for airport transfers</li>
+                            <li>Port of Rafína transfers: 30€ for taxi, 60€ for van, 100€ for VIP van</li>
                             <li>Two Taxis: Same price as Taxi Van</li>
                             <li>All prices include taxes and service fees</li>
                         </ul>
@@ -538,6 +630,7 @@
         const fromAddressGroup = document.getElementById('fromAddressGroup');
         const toAddressGroup = document.getElementById('toAddressGroup');
         const flightGroup = document.getElementById('flightGroup');
+        const shipGroup = document.getElementById('shipGroup');
         const passengers = document.getElementById('passengers');
         const vehicleType = document.getElementById('vehicleType');
         const priceDisplay = document.getElementById('priceAmount');
@@ -545,6 +638,13 @@
         const sendButton = document.getElementById('sendWhatsApp');
         const dateInput = document.getElementById('date');
         const timeInput = document.getElementById('time');
+        
+        // Modal elements
+        const modal = document.getElementById('availabilityModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalMessage = document.getElementById('modalMessage');
+        const closeModal = document.getElementById('closeModal');
+        const confirmModal = document.getElementById('confirmModal');
         
         // Set default date to tomorrow
         const tomorrow = new Date();
@@ -563,7 +663,7 @@
             } else {
                 fromAddressGroup.style.display = 'none';
             }
-            checkFlightField();
+            checkAdditionalFields();
             calculatePrice();
         });
         
@@ -573,16 +673,24 @@
             } else {
                 toAddressGroup.style.display = 'none';
             }
-            checkFlightField();
+            checkAdditionalFields();
             calculatePrice();
         });
         
-        // Check if we should show flight number field
-        function checkFlightField() {
+        // Check if we should show flight or ship fields
+        function checkAdditionalFields() {
+            // Check for airport
             if (fromLocation.value.includes('Airport') || toLocation.value.includes('Airport')) {
                 flightGroup.style.display = 'block';
             } else {
                 flightGroup.style.display = 'none';
+            }
+            
+            // Check for Port of Rafína
+            if (fromLocation.value === 'Port of Rafína' || toLocation.value === 'Port of Rafína') {
+                shipGroup.style.display = 'block';
+            } else {
+                shipGroup.style.display = 'none';
             }
         }
         
@@ -602,7 +710,37 @@
             calculatePrice();
         });
         
-        vehicleType.addEventListener('change', calculatePrice);
+        // Show vehicle availability notices
+        vehicleType.addEventListener('change', function() {
+            if (this.value === 'Taxi Van') {
+                showModal("Taxi Van Availability Notice", "In case the VAN is not available at that time slot, 2 taxis will be sent.");
+            } else if (this.value === 'VIP Van') {
+                showModal("VIP Van Availability Notice", "VIP Van is subject to availability. We will confirm back to you once the request is completed.");
+            }
+            calculatePrice();
+        });
+        
+        // Modal functions
+        function showModal(title, message) {
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            modal.style.display = 'flex';
+        }
+        
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+        
+        confirmModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
         dateInput.addEventListener('change', calculatePrice);
         timeInput.addEventListener('change', calculatePrice);
         
@@ -624,6 +762,11 @@
                 return;
             }
             
+            // Check for Port of Rafína route
+            const isPortRoute = 
+                (from === "Niriidwn 12 Artemis (Family Beach House)" && to === "Port of Rafína") ||
+                (from === "Port of Rafína" && to === "Niriidwn 12 Artemis (Family Beach House)");
+            
             // Handle airport routes
             const isAirportRoute = 
                 (from === "Niriidwn 12 Artemis (Family Beach House)" && to === "Athens International Airport") ||
@@ -632,12 +775,22 @@
             // Handle other routes
             const isOtherRoute = 
                 from === "Other" || to === "Other" ||
-                !isAirportRoute;
+                (!isPortRoute && !isAirportRoute);
             
             // Apply pricing rules
             let finalPrice = 0;
             
-            if (isAirportRoute) {
+            if (isPortRoute) {
+                // Port of Rafína route pricing
+                if (vehicle === 'VIP Van') {
+                    finalPrice = 100;
+                } else if (vehicle === 'Standard Taxi') {
+                    finalPrice = 30;
+                } else if (vehicle === 'Taxi Van' || vehicle === 'Two Taxis') {
+                    finalPrice = 60;
+                }
+            } 
+            else if (isAirportRoute) {
                 // Determine direction
                 const toAirport = from === "Niriidwn 12 Artemis (Family Beach House)" && to === "Athens International Airport";
                 const fromAirport = from === "Athens International Airport" && to === "Niriidwn 12 Artemis (Family Beach House)";
@@ -683,6 +836,7 @@
                 toLocation.value;
                 
             const flightNumber = document.getElementById('flightNumber').value;
+            const shipName = document.getElementById('shipName').value;
             const passengerCount = passengers.value;
             const vehicle = vehicleType.value;
             const checkedLuggage = document.getElementById('checkedLuggage').value;
@@ -713,6 +867,10 @@
             
             if (flightNumber) {
                 message += `• *Flight Number:* ${flightNumber}\n`;
+            }
+            
+            if (shipName) {
+                message += `• *Ship Name:* ${shipName}\n`;
             }
             
             message += `• *Passengers:* ${passengerCount}\n`;
